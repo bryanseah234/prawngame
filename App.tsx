@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
@@ -26,6 +27,8 @@ const shuffleArray = <T,>(array: T[]): T[] => {
   return newArray;
 };
 
+const STORAGE_KEY = 'prawn_players_v2'; // Updated key to invalidate old cache
+
 const App: React.FC = () => {
   // --- State ---
   const [theme, setTheme] = useState<Theme>('classic');
@@ -50,7 +53,7 @@ const App: React.FC = () => {
   // Initialize Logic
   useEffect(() => {
     // Load players from local storage
-    const savedPlayers = localStorage.getItem('wnrs_players');
+    const savedPlayers = localStorage.getItem(STORAGE_KEY);
     if (savedPlayers) {
       try {
         setPlayers(JSON.parse(savedPlayers));
@@ -73,7 +76,7 @@ const App: React.FC = () => {
 
   // Persist players
   useEffect(() => {
-    localStorage.setItem('wnrs_players', JSON.stringify(players));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(players));
   }, [players]);
 
   // --- Game Logic ---
@@ -325,7 +328,7 @@ const App: React.FC = () => {
                     <Button 
                       variant="icon" 
                       onClick={nextCard}
-                      className="h-14 w-14 md:h-16 md:w-16 bg-current text-current inverse-text hover:scale-105 active:scale-95 transition-transform flex items-center justify-center shadow-lg"
+                      className="h-14 w-14 md:h-16 md:w-16 bg-current text-current hover:scale-105 active:scale-95 transition-transform flex items-center justify-center shadow-lg"
                       style={{ 
                         backgroundColor: theme === 'classic' ? '#C31C23' : '#FFFFFF',
                         color: theme === 'classic' ? '#FFFFFF' : '#000000'
