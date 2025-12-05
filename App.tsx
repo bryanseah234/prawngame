@@ -210,59 +210,63 @@ const App: React.FC = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="flex-1 flex flex-col w-full max-w-md mx-auto p-6"
+              className="flex-1 flex flex-col items-center w-full max-w-md mx-auto p-6 relative"
             >
-              <div className="shrink-0 mb-8 text-center mt-auto">
-                <h2 className="text-3xl font-bold mb-2">Who's playing?</h2>
-                <p className="opacity-60">Add everyone who's playing on this device.</p>
-              </div>
+              {/* Centered Content Container - using flex-1 to push it to vertical center */}
+              <div className="flex-1 flex flex-col items-center justify-center w-full -mt-20">
+                <div className="text-center mb-8">
+                  <h2 className="text-3xl font-bold mb-2">Who's playing?</h2>
+                  <p className="opacity-60">Add everyone who's playing on this device.</p>
+                </div>
 
-              <div className="shrink-0 flex gap-2 mb-6">
-                <input
-                  type="text"
-                  value={inputValue}
-                  onChange={(e) => setInputValue(e.target.value)}
-                  onKeyDown={(e) => e.key === 'Enter' && addPlayer()}
-                  placeholder="Enter name..."
-                  className={`flex-1 px-4 py-3 rounded-lg border-2 bg-transparent focus:outline-none focus:ring-2 transition-all
-                    ${theme === 'classic' 
-                      ? 'border-gray-200 focus:border-wnrs-red focus:ring-red-100' 
-                      : 'border-gray-800 focus:border-white focus:ring-white/10'}`}
-                />
-                <Button onClick={addPlayer} disabled={!inputValue.trim()}>
-                  Add
-                </Button>
-              </div>
+                <div className="w-full flex gap-2 mb-8">
+                  <input
+                    type="text"
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)}
+                    onKeyDown={(e) => e.key === 'Enter' && addPlayer()}
+                    placeholder="Enter name..."
+                    className={`flex-1 px-4 py-3 rounded-lg border-2 bg-transparent focus:outline-none focus:ring-2 transition-all
+                      ${theme === 'classic' 
+                        ? 'border-gray-200 focus:border-wnrs-red focus:ring-red-100' 
+                        : 'border-gray-800 focus:border-white focus:ring-white/10'}`}
+                  />
+                  <Button onClick={addPlayer} disabled={!inputValue.trim()}>
+                    Add
+                  </Button>
+                </div>
 
-              {/* Scrollable Player List - Takes remaining space */}
-              <div className="flex-1 overflow-y-auto mb-6 space-y-2 pr-2">
-                <AnimatePresence>
-                  {players.map((p, i) => (
-                    <motion.div
-                      key={`${p}-${i}`}
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, height: 0 }}
-                      className={`flex justify-between items-center p-3 rounded-lg ${theme === 'classic' ? 'bg-white shadow-sm border border-gray-100' : 'bg-wnrs-darkgrey'}`}
-                    >
-                      <span className="font-medium">{p}</span>
-                      <button 
-                        onClick={() => removePlayer(i)}
-                        className="p-1 opacity-40 hover:opacity-100 transition-opacity"
+                {/* Player List - Centered under input, scrollable if long */}
+                <div className="w-full max-h-[30vh] overflow-y-auto space-y-2 pr-2">
+                  <AnimatePresence>
+                    {players.map((p, i) => (
+                      <motion.div
+                        key={`${p}-${i}`}
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        className={`flex justify-between items-center p-3 rounded-lg ${theme === 'classic' ? 'bg-white shadow-sm border border-gray-100' : 'bg-wnrs-darkgrey'}`}
                       >
-                        <X size={16} />
-                      </button>
-                    </motion.div>
-                  ))}
-                  {players.length === 0 && (
-                    <div className="text-center opacity-40 py-8 italic">
-                      No players added yet
-                    </div>
-                  )}
-                </AnimatePresence>
+                        <span className="font-medium">{p}</span>
+                        <button 
+                          onClick={() => removePlayer(i)}
+                          className="p-1 opacity-40 hover:opacity-100 transition-opacity"
+                        >
+                          <X size={16} />
+                        </button>
+                      </motion.div>
+                    ))}
+                    {players.length === 0 && (
+                      <div className="text-center opacity-40 py-2 italic text-sm">
+                        No players added yet
+                      </div>
+                    )}
+                  </AnimatePresence>
+                </div>
               </div>
 
-              <div className="shrink-0 mt-auto pb-4">
+              {/* Bottom Button - Absolute positioned to stay at bottom regardless of center alignment */}
+              <div className="absolute bottom-6 left-6 right-6 pb-safe">
                 <Button fullWidth onClick={startGame} disabled={players.length === 0}>
                   <span className="flex items-center justify-center gap-2">
                     Start Game <Play size={18} fill="currentColor" />
