@@ -53,7 +53,7 @@ export const GameCard: React.FC<GameCardProps> = ({ card, isFlipped, onFlip, the
           className={`absolute inset-0 rounded-2xl backface-hidden flex flex-col items-center justify-center ${backBg} ${backText}`}
         >
           <h1 className="text-5xl md:text-7xl font-bold tracking-tighter">WNRS</h1>
-          <p className="mt-4 text-xs tracking-widest uppercase opacity-80">Prawn Game Edition</p>
+          <p className="mt-4 text-xs tracking-widest uppercase opacity-80">Prawn Edition</p>
         </div>
 
         {/* The 'Front' (Question side) - Rotated 180 */}

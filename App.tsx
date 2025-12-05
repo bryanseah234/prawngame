@@ -297,26 +297,8 @@ const App: React.FC = () => {
               {/* On mobile: fixed at bottom. On Desktop: fixed sidebar width */}
               <div className="shrink-0 w-full md:w-80 flex flex-col justify-end md:justify-center gap-4 md:gap-8 z-10 pb-safe">
                 
-                {/* Turn Indicator */}
-                <div className="flex flex-row md:flex-col justify-between md:justify-center items-center gap-2 md:gap-4 p-4 rounded-xl backdrop-blur-sm
-                   ${theme === 'classic' ? 'bg-white/50 md:bg-gray-50' : 'bg-white/5 md:bg-white/5'}">
-                  <div className="flex flex-col md:text-center">
-                    <span className="text-[10px] md:text-xs font-bold tracking-widest uppercase opacity-50 mb-1">Current Turn</span>
-                    <span className="text-xl md:text-3xl font-bold truncate max-w-[150px] md:max-w-full">{currentPlayerName}</span>
-                  </div>
-                  <Button 
-                    variant="secondary" 
-                    onClick={shufflePlayers}
-                    title="Shuffle Player Order"
-                    className="flex items-center gap-2 text-xs md:text-sm whitespace-nowrap"
-                  >
-                    <Dices size={16} />
-                    <span>Shuffle Order</span>
-                  </Button>
-                </div>
-
-                {/* Navigation Controls */}
-                <div className="flex items-center justify-between gap-4">
+                {/* Navigation Controls (Arrows) - Top on mobile, Middle on Desktop (via order) */}
+                <div className="order-1 md:order-2 flex items-center justify-between gap-4">
                   <Button 
                     variant="icon" 
                     onClick={prevCard} 
@@ -345,8 +327,26 @@ const App: React.FC = () => {
                   </Button>
                 </div>
 
-                {/* Deck Options Toggle */}
-                <div className={`p-3 md:p-4 rounded-xl flex items-center justify-between transition-colors
+                {/* Turn Indicator - Bottom on mobile, Top on Desktop (via order) */}
+                <div className={`order-2 md:order-1 flex flex-row md:flex-col justify-between md:justify-center items-center gap-2 md:gap-4 p-4 rounded-xl backdrop-blur-sm transition-colors
+                   ${theme === 'classic' ? 'bg-white/50 md:bg-gray-50' : 'bg-white/5 md:bg-white/5'}`}>
+                  <div className="flex flex-col md:text-center">
+                    <span className="text-[10px] md:text-xs font-bold tracking-widest uppercase opacity-50 mb-1">Current Turn</span>
+                    <span className="text-xl md:text-3xl font-bold truncate max-w-[150px] md:max-w-full">{currentPlayerName}</span>
+                  </div>
+                  <Button 
+                    variant="secondary" 
+                    onClick={shufflePlayers}
+                    title="Shuffle Player Order"
+                    className="flex items-center gap-2 text-xs md:text-sm whitespace-nowrap"
+                  >
+                    <Dices size={16} />
+                    <span>Shuffle Order</span>
+                  </Button>
+                </div>
+
+                {/* Deck Options Toggle - Always last */}
+                <div className={`order-3 p-3 md:p-4 rounded-xl flex items-center justify-between transition-colors
                   ${theme === 'classic' ? 'bg-gray-100' : 'bg-wnrs-darkgrey'}`}>
                   <div className="flex items-center gap-3">
                     <div className={`p-2 rounded-full ${wildcardsEnabled ? 'bg-yellow-400 text-black' : 'bg-gray-400 text-white'}`}>
