@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
@@ -340,7 +339,7 @@ const App: React.FC = () => {
                   <div className={`order-3 p-3 md:p-4 rounded-xl flex items-center justify-between transition-colors
                     ${theme === 'classic' ? 'bg-gray-100' : 'bg-wnrs-darkgrey'}`}>
                     <div className="flex items-center gap-3">
-                      <div className={`p-2 rounded-full ${wildcardsEnabled ? 'bg-yellow-400 text-black' : 'bg-gray-400 text-white'}`}>
+                      <div className={`p-2 rounded-full ${wildcardsEnabled ? 'bg-wnrs-red text-white' : 'bg-gray-400 text-white'}`}>
                         <Sparkles size={16} />
                       </div>
                       <span className="font-medium text-sm">Wildcards</span>

@@ -82,11 +82,6 @@ export const GameCard: React.FC<GameCardProps> = ({ card, isFlipped, onFlip, the
             </h2>
           </div>
           
-          {card.wildcard && (
-            <div className="absolute bottom-6 text-xs md:text-sm font-semibold uppercase tracking-widest border border-current px-3 py-1 rounded-full opacity-60">
-              Wildcard
-            </div>
-          )}
         </div>
       </motion.div>
     </div>
