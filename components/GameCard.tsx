@@ -67,7 +67,8 @@ export const GameCard: React.FC<GameCardProps> = ({ card, isFlipped, onFlip, the
 
         {/* The 'Front' (Question side) - Rotated 180 */}
         <div 
-          className={`absolute inset-0 rounded-2xl backface-hidden rotate-y-180 flex flex-col items-center justify-center p-6 md:p-10 text-center ${frontBg} ${frontText}`}
+          // Increased vertical padding: py-12 (mobile), py-20 (desktop) for more allowance
+          className={`absolute inset-0 rounded-2xl backface-hidden rotate-y-180 flex flex-col items-center justify-center px-6 py-12 md:px-12 md:py-20 text-center ${frontBg} ${frontText}`}
         >
           {card.wildcard && (
             <div className="absolute top-4 right-4 md:top-6 md:right-6">
