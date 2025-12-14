@@ -28,6 +28,13 @@ export const GameCard: React.FC<GameCardProps> = ({ card, isFlipped, onFlip, the
   const backBg = theme === 'classic' ? classicBackBg : midnightBackBg;
   const backText = theme === 'classic' ? classicBackText : midnightBackText;
 
+  const getFontSizeClass = (textLength: number) => {
+    if (textLength <= 50) return "text-3xl md:text-5xl";
+    if (textLength <= 100) return "text-2xl md:text-4xl";
+    if (textLength <= 180) return "text-xl md:text-3xl";
+    return "text-lg md:text-2xl";
+  };
+
   if (!card) {
     return (
       <div className={`w-full h-full aspect-[3/4] max-h-[600px] rounded-2xl flex items-center justify-center ${theme === 'classic' ? 'bg-gray-100' : 'bg-wnrs-darkgrey'} opacity-50`}>
@@ -66,8 +73,8 @@ export const GameCard: React.FC<GameCardProps> = ({ card, isFlipped, onFlip, the
             </div>
           )}
           
-          <div className="flex-1 flex items-center justify-center w-full">
-             <h2 className="text-2xl md:text-4xl font-bold leading-tight select-none w-full break-words">
+          <div className="flex-1 flex items-center justify-center w-full overflow-hidden">
+             <h2 className={`${getFontSizeClass(card.text.length)} font-bold leading-tight select-none w-full break-words`}>
               {card.text}
             </h2>
           </div>

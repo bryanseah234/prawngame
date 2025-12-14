@@ -171,14 +171,14 @@ const App: React.FC = () => {
 
         {/* Right Controls - Absolute to allow perfect centering of title */}
         <div className="absolute right-4 flex items-center gap-2">
-          <Button variant="icon" onClick={() => setTheme(prev => prev === 'classic' ? 'midnight' : 'classic')}>
-            {theme === 'classic' ? <Moon size={20} /> : <Sun size={20} />}
-          </Button>
           {view === 'game' && (
             <Button variant="icon" onClick={() => setView('setup')}>
               <Settings size={20} />
             </Button>
           )}
+          <Button variant="icon" onClick={() => setTheme(prev => prev === 'classic' ? 'midnight' : 'classic')}>
+            {theme === 'classic' ? <Moon size={20} /> : <Sun size={20} />}
+          </Button>
         </div>
       </header>
 
