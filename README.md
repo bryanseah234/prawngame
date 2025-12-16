@@ -1,20 +1,30 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Prawn Game
 
-# Run and deploy your AI Studio app
+A digital card game inspired by "We're Not Really Strangers", designed to deepen relationships through meaningful questions and interactive wildcards.
 
-This contains everything you need to run your app locally.
+## Features
 
-View your app in AI Studio: https://ai.studio/apps/drive/1Qzz6TYGQZH1WbciSRQw5SpIcjYh1jvEB
+*   **Deep Questions & Wildcards:** A vast library of prompts to spark conversation.
+*   **Multiplayer Setup:** Add players and track turns easily.
+*   **Theming:** Switch between Classic and Midnight (Dark) modes.
+*   **Responsive UI:** Mobile-first design with smooth 3D animations.
 
-## Run Locally
+## Tech Stack
 
-**Prerequisites:**  Node.js
+*   React + TypeScript
+*   Vite
+*   Tailwind CSS
+*   Framer Motion
 
+## Development
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+```bash
+# Install dependencies
+npm install
+
+# Start dev server
+npm run dev
+
+# Build for production
+npm run build
+```
