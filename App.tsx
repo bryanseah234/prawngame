@@ -165,7 +165,7 @@ const App: React.FC = () => {
       <header className="h-16 shrink-0 relative flex items-center justify-center z-20 px-4">
         {/* Title Centered via Flex + Absolute positioning of controls */}
         <span className={`font-bold text-xl tracking-tighter text-center ${theme === 'classic' ? 'text-wnrs-red' : 'text-white'}`}>
-          PRAWN GAME
+          THE PRAWN GAME
         </span>
 
         {/* Right Controls - Absolute to allow perfect centering of title */}
