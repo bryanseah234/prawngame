@@ -234,9 +234,10 @@ const App: React.FC = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="flex-1 flex flex-col items-center w-full max-w-md sm:max-w-lg lg:max-w-xl mx-auto px-4 sm:px-6 py-4 sm:py-6"
+              className="flex-1 flex flex-col items-center justify-center w-full max-w-md sm:max-w-lg lg:max-w-xl mx-auto px-4 sm:px-6 py-4 sm:py-6"
             >
-              <div className="flex-1 flex flex-col items-center justify-center w-full">
+              {/* Options and button grouped together */}
+              <div className="w-full flex flex-col items-center">
                 <div className="text-center mb-4 sm:mb-6 lg:mb-8">
                   <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-1 sm:mb-2">Card Options</h2>
                   <p className="opacity-60 text-sm sm:text-base lg:text-lg">Choose which card sets to include.</p>
@@ -277,14 +278,15 @@ const App: React.FC = () => {
                     </motion.div>
                   ))}
                 </div>
-              </div>
 
-              <div className="w-full mt-4 sm:mt-6 lg:mt-8 pb-safe">
-                <Button fullWidth onClick={startGame} disabled={!hasEnabledCardSet} className="py-4 sm:py-5 lg:py-6 text-base sm:text-lg lg:text-xl">
-                  <span className="flex items-center justify-center gap-2 sm:gap-3">
-                    Start Game <Play className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" fill="currentColor" />
-                  </span>
-                </Button>
+                {/* Start Game button directly below options */}
+                <div className="w-full mt-4 sm:mt-6 lg:mt-8">
+                  <Button fullWidth onClick={startGame} disabled={!hasEnabledCardSet} className="py-4 sm:py-5 lg:py-6 text-base sm:text-lg lg:text-xl">
+                    <span className="flex items-center justify-center gap-2 sm:gap-3">
+                      Start Game <Play className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" fill="currentColor" />
+                    </span>
+                  </Button>
+                </div>
               </div>
             </motion.div>
           )}
@@ -342,6 +344,13 @@ const App: React.FC = () => {
 
         </AnimatePresence>
       </main>
+
+      {/* Footer */}
+      <footer className="shrink-0 py-3 sm:py-4 text-center pb-safe">
+        <span className={`text-[10px] sm:text-xs lg:text-sm font-bold tracking-[0.2em] uppercase ${theme === 'classic' ? 'text-gray-400' : 'text-gray-600'}`}>
+          BUILT WITH <span className="text-wnrs-red">🦐</span> POWER
+        </span>
+      </footer>
     </div>
   );
 };
