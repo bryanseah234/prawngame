@@ -203,16 +203,22 @@ const App: React.FC = () => {
     <div className={`min-h-screen min-h-[100dvh] w-full overflow-y-auto overflow-x-hidden flex flex-col transition-colors duration-500 hide-scrollbar ${theme === 'classic' ? 'text-black bg-[#F5F5F5]' : 'text-white bg-[#0a0a0a]'}`}>
 
       <header className="h-12 sm:h-14 lg:h-16 shrink-0 sticky top-0 z-20 flex items-center justify-center px-4 sm:px-6 backdrop-blur-sm bg-inherit">
-        <span className={`font-bold text-lg sm:text-xl lg:text-2xl tracking-tighter text-center ${theme === 'classic' ? 'text-wnrs-red' : 'text-white'}`}>
-          THE PRAWN GAME
-        </span>
-
-        <div className="absolute right-3 sm:right-4 lg:right-6 flex items-center gap-1 sm:gap-2">
+        {/* Settings icon - top left (only in game view) */}
+        <div className="absolute left-3 sm:left-4 lg:left-6">
           {view === 'game' && (
             <Button variant="icon" className="p-2 sm:p-2.5 lg:p-3" onClick={() => setView('splash')}>
               <Settings className="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7" />
             </Button>
           )}
+        </div>
+
+        {/* Title - centered */}
+        <span className={`font-bold text-lg sm:text-xl lg:text-2xl tracking-tighter text-center ${theme === 'classic' ? 'text-wnrs-red' : 'text-white'}`}>
+          THE PRAWN GAME
+        </span>
+
+        {/* Theme toggle - top right */}
+        <div className="absolute right-3 sm:right-4 lg:right-6">
           <Button variant="icon" className="p-2 sm:p-2.5 lg:p-3" onClick={() => setTheme(prev => prev === 'classic' ? 'midnight' : 'classic')}>
             {theme === 'classic' ? <Moon className="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7" /> : <Sun className="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7" />}
           </Button>
@@ -262,10 +268,9 @@ const App: React.FC = () => {
                             ? (theme === 'classic' ? 'bg-wnrs-red' : 'bg-white')
                             : 'bg-gray-400'}`}
                       >
-                        <motion.div
-                          className="absolute top-0.5 left-0.5 w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 bg-white rounded-full shadow-sm"
-                          animate={{ x: cardSet.enabled ? 16 : 0 }}
-                          transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                        <div
+                          className={`absolute top-0.5 w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 rounded-full shadow-sm transition-all duration-200 ease-out
+                            ${cardSet.enabled ? 'left-[calc(100%-0.125rem)] -translate-x-full' : 'left-0.5 translate-x-0'}`}
                           style={{ backgroundColor: cardSet.enabled && theme === 'midnight' ? 'black' : 'white' }}
                         />
                       </button>
@@ -290,20 +295,19 @@ const App: React.FC = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="flex-1 flex flex-col w-full max-w-4xl mx-auto px-3 py-1"
+              className="flex-1 flex flex-col items-center justify-center w-full max-w-4xl mx-auto px-3 py-4 sm:py-6"
             >
-
-              <div className="flex-1 flex items-center justify-center">
+              {/* Card and controls grouped together */}
+              <div className="w-full flex flex-col items-center">
                 <GameCard
                   card={currentCard}
                   isFlipped={isFlipped}
                   onFlip={() => setIsFlipped(prev => !prev)}
                   theme={theme}
                 />
-              </div>
 
-              <div className="shrink-0 w-full py-3 sm:py-4 lg:py-5 pb-safe">
-                <div className="flex items-center justify-center gap-4 sm:gap-6 lg:gap-8">
+                {/* Navigation buttons directly below card */}
+                <div className="mt-4 sm:mt-6 lg:mt-8 flex items-center justify-center gap-4 sm:gap-6 lg:gap-8">
                   <Button
                     variant="icon"
                     onClick={prevCard}
@@ -334,6 +338,7 @@ const App: React.FC = () => {
               </div>
             </motion.div>
           )}
+
 
         </AnimatePresence>
       </main>
