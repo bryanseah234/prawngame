@@ -1,0 +1,44 @@
+name: Prawn Game checks
+
+on:
+  push:
+    branches: [main]
+    paths: ['**.ts', '**.tsx', '**.mjs', '**.css', 'index.html', 'questions.json', 'package*.json', 'tsconfig*.json', 'public/**', 'postcss.config.js', '.github/workflows/game-checks.yml']
+  pull_request:
+    paths: ['**.ts', '**.tsx', '**.mjs', '**.css', 'index.html', 'questions.json', 'package*.json', 'tsconfig*.json', 'public/**', 'postcss.config.js', '.github/workflows/game-checks.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: prawn-game-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  game:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:browser
+      - uses: actions/upload-artifact@v6
+        with:
+          name: prawn-game-build
+          path: dist/
+          retention-days: 3
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v6
+        if: always()
+        with:
+          name: prawn-game-browser-evidence
+          path: test-results/
+          retention-days: 3

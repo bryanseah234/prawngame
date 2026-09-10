@@ -26,11 +26,9 @@
     "allowSyntheticDefaultImports": true,
 
     /* Paths */
-    "baseUrl": ".",
     "paths": {
       "@/*": ["./*"]
     }
   },
-  "include": [".", "vite-env.d.ts"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "include": [".", "vite-env.d.ts"]
 }
